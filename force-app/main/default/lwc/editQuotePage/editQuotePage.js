@@ -5,6 +5,8 @@
 
 import { LightningElement, api } from "lwc";
 import updateQuote from "@salesforce/apex/EditQuotePage_Ctrl.updateQuote";
+import { showMessage } from 'c/utilityComponent';
+
 export default class EditQuotePage extends LightningElement {
   @api recordId;
   updatedQutoes = {};
@@ -17,8 +19,13 @@ export default class EditQuotePage extends LightningElement {
   saveUpdatedQuotes() {
     updateQuote({ adjustQuoteJson: JSON.stringify(this.updatedQutoes) })
           .then(result => {
-            this.template.querySelector('c-quote-total-summary').refresh(); 
-            this.template.querySelector('c-edit-quote').refresh(); 
+            showMessage(this, 'Success', 'Quote successfully updated', 'success');
+
+            setTimeout(() => {
+              this.template.querySelector('c-quote-total-summary').refresh(); 
+              this.template.querySelector('c-edit-quote').refresh(); 
+            }, 5000); 
+           
           }) 
           .catch(error => {
               this.error = error;
