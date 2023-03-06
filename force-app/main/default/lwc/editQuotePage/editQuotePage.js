@@ -4,14 +4,25 @@
  */
 
 import { LightningElement, api } from "lwc";
-
+import updateQuote from "@salesforce/apex/EditQuotePage_Ctrl.updateQuote";
 export default class EditQuotePage extends LightningElement {
   @api recordId;
-  updatedQutoes;
+  updatedQutoes = {};
   onSave(event){
-
-    console.log('oonsave');
-    console.log(event.target.detail);
-    this.updatedQutoes = event.target.detail;
+        this.updatedQutoes = event.detail;
+        this.updatedQutoes['recordId'] = this.recordId;
+        this.saveUpdatedQuotes();
+  }
+  
+  saveUpdatedQuotes() {
+    updateQuote({ adjustQuoteJson: JSON.stringify(this.updatedQutoes) })
+          .then(result => {
+            this.template.querySelector('c-quote-total-summary').refresh(); 
+            this.template.querySelector('c-edit-quote').refresh(); 
+          }) 
+          .catch(error => {
+              this.error = error;
+              this.property = undefined;
+          });
   }
 }

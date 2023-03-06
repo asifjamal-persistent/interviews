@@ -3,16 +3,29 @@
   <div class="slds-m-around_medium">
     <h3 class="slds-page-header__title">Quote Adjusted Amount</h3>
     <span>&nbsp;</span>
-    <lightning-button
-      variant="brand"
-      type="button"
-      label="Adjust quote"
-      onclick={onAdjustClick}
-    ></lightning-button>
+    <lightning-button variant="brand" type="button" label="Adjust quote" onclick={onAdjustClick}></lightning-button>
   </div>
-  <template if:true={isClicked} >
-    <lightning-input type="date" name="startDate" label="Date" value={startDate}></lightning-input>
-    <lightning-input type="date" name="endDate" label="Date" value={endtDate}></lightning-input>
-    <lightning-button variant="base" label="Save" title="label" onclick={handleSave}></lightning-button>
+  <template if:true={isClicked}>
+    <lightning-layout multiple-rows>
+      <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6"
+        large-device-size="3">
+        <lightning-layout multiple-rows>
+          <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6"
+            large-device-size="12">
+            <lightning-input type="date" data-name="startDate" name="startDate" label="Date"
+              value={startDate}></lightning-input>
+          </lightning-layout-item>
+          <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6"
+            large-device-size="12">
+            <lightning-input type="date" data-name="endDate" name="endDate" label="Date"
+              value={endtDate}></lightning-input>
+          </lightning-layout-item>
+          <lightning-layout-item size="12" padding="around-small" small-device-size="3" medium-device-size="6"
+            large-device-size="12">
+            <lightning-button variant="base" label="Save" title="label" onclick={handleSave}></lightning-button>
+          </lightning-layout-item>
+        </lightning-layout>
+      </lightning-layout-item>
+    </lightning-layout>
   </template>
 </template>

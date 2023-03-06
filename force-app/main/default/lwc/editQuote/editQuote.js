@@ -9,6 +9,7 @@ import { showMessage } from 'c/utilityComponent';
 
 export default class EditQuote extends LightningElement {
   @api recordId;
+  isLoading = true;
   quoteData = {
     name: "Quote Name",
     endDate: 1547250828000
@@ -17,12 +18,12 @@ export default class EditQuote extends LightningElement {
   connectedCallback() {
     this.getQuote();
   }
-  param;
   getQuote() {
     if (this.recordId) {
       getQuoteFromApex({ quoteId: this.recordId })
         .then(result => {
           this.quoteData = result;
+          this.isLoading = false;
           // Success logic...
         })
         .catch(error => {
@@ -32,6 +33,9 @@ export default class EditQuote extends LightningElement {
         });
     }
   }
-
+  @api refresh(){
+    this.isLoading = true;
+    this.getQuote();
+  }
   renderedCallback() { }
 }

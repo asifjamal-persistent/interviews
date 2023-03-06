@@ -1,14 +1,32 @@
 <!-- Edit Quote -->
 <template>
+  <template if:true={isLoading}>
+    <div>
+      <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </div>
+  </template>
+ 
+  
   <h3 class="slds-page-header__title">Welcome to quote {quoteData.name}!</h3>
   Quote Project Ends On:
   Name: {quoteData.name}
-  <lightning-formatted-date-time
-    value={quoteData.endDate}
-    time-zone="UTC"
-  ></lightning-formatted-date-time>
-  <lightning-formatted-date-time
+  
+  
+  
+  <p>
+    <lightning-icon icon-name='standard:record_update' alternative-text='record_update' size='small' title='record_update'></lightning-icon>
+    Start Date: 
+    <lightning-formatted-date-time
     value={quoteData.startDate}
     time-zone="UTC"
   ></lightning-formatted-date-time>
+  </p>
+  <p>
+    <lightning-icon icon-name='standard:record_update' alternative-text='record_update' size='small' title='record_update'></lightning-icon>
+    End Date: 
+    <lightning-formatted-date-time
+    value={quoteData.endDate}
+    time-zone="UTC"
+  ></lightning-formatted-date-time>
+  </p>
 </template>

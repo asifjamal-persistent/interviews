@@ -3,39 +3,27 @@
  * Copyright (c) 2023 Provus Inc. All rights reserved.
  */
 
-import { LightningElement } from "lwc";
+import { LightningElement, api } from "lwc";
 
 export default class QuoteTotalSummary extends LightningElement {
 
     isClicked = false;
-    updatedQuote;
-    handleSave(){
-  
-        console.log('save');
+    @api updatedQuote = {};
+    handleSave(){  
       this.getDataFromCLient();
     }
   
     getDataFromCLient(){
-        console.log('get data');
-      var inp=this.template.querySelectorAll("ightning-input");
-    //   inp.forEach(function(element){
-    //       if(element.name=="startDate")
-    //           console.log(element.value);
-    //       else if(element.name=="endDate")
-    //       console.log(element.value);
-    //     },this);
-
-        inp.forEach(element => {
-            console.log(element.value);
-        });
-  
-      console.log('child save');
-      console.log('child save', this.updatedQuote);
-      const event = new CustomEvent('save', {detail: this.updatedQuote });
-             this.dispatchEvent(event);
-      
+     let collectionList = this.template.querySelectorAll('lightning-input');
+    collectionList.forEach(element => {
+      this.updatedQuote[element['name']] = element['value'];
+    });
+      this.dispatchEvent(new CustomEvent('save', {detail: this.updatedQuote }));
     }
     onAdjustClick(){
         this.isClicked = true;
+    }
+    @api refresh(){
+      this.isClicked = false;
     }
 }
