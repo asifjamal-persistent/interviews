@@ -7,6 +7,12 @@
       variant="brand"
       type="button"
       label="Adjust quote"
+      onclick={onAdjustClick}
     ></lightning-button>
   </div>
+  <template if:true={isClicked} >
+    <lightning-input type="date" name="startDate" label="Date" value={startDate}></lightning-input>
+    <lightning-input type="date" name="endDate" label="Date" value={endtDate}></lightning-input>
+    <lightning-button variant="base" label="Save" title="label" onclick={handleSave}></lightning-button>
+  </template>
 </template>

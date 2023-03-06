@@ -8,4 +8,5 @@ import { LightningElement } from "lwc";
 export default class AdjustQuotePrice extends LightningElement {
   adjustedAmountLabel = "Adjusted Amount";
   adjustedAmount = 0;
+ 
 }
