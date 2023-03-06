@@ -9,6 +9,7 @@ public with sharing class QuoteDto extends BaseDto {
     this.endDate = quote.EndDate__c;
   }
 
+  
   public override SObject refreshSo() {
     return null;
   }
